@@ -1,92 +1,1691 @@
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>ISTE-KEC</title>
-        <link rel="stylesheet" href="">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Sharp|Material+Icons+Two+Tone" rel="stylesheet" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    </head>
-    <body>
-        
-        <div class="home">
-           
-               
-            <header>
-                <div class="logo">
-                    ISTE-KEC
-                </div>
-                <div class="hamburger">
-                    <div class="line"></div>
-                    <div class="line"></div>
-                    <div class="line"></div>
-                </div>
-                <nav class="nav-bar">
-                    <ul>
-                        <li><a href="#" class="active">Home</a></li>
-                        <li><a href="/about" class="active">About Us</a></li>
-                        <li><a href="/team" class="active">Our Team</a></li>
-                        <li><a href="/event" class="active">Events</a></li>
-                        <li><a href="/contact" class="active">Contact</a></li>
-                    </ul>
-                </nav>
-            </header>
-           <!-- Floating button for events -->
-<!-- Floating button with sparkles -->
-<button class="floating-btn" onclick="window.location.href='/event'">
-    <i class="fas fa-calendar-alt"></i>
-    <!-- Sparkle stars -->
-    <span class="sparkle"></span>
-    <span class="sparkle"></span>
-    <span class="sparkle"></span>
-    <span class="sparkle"></span>
-    <span class="sparkle"></span>
-</button>
+{% extends 'base.html' %}
+
+{% block head %}
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<style>
+    /* Hero Section */
+    .hero {
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero-video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 0;
+    }
+
+    .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        /* Adjust opacity for readability */
+        z-index: 1;
+    }
+
+    .hero-content {
+        text-align: center;
+        z-index: 2;
+        max-width: 1000px;
+        padding: 0 20px;
+    }
+
+    .hero-label {
+        color: var(--secondary);
+        font-size: 1.1rem;
+        font-weight: 600;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+        display: block;
+    }
+
+    .hero h1 {
+        font-size: 4.5rem;
+        /* Slightly smaller for better fit */
+        line-height: 1.1;
+        margin-bottom: 1.5rem;
+        font-weight: 800;
+        text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero h1 span {
+        color: var(--primary);
+        display: block;
+    }
+
+    .hero p {
+        font-size: 1.2rem;
+        color: #d0d0d0;
+        max-width: 700px;
+        margin: 0 auto 3rem;
+        font-weight: 300;
+    }
+
+    .hero-btns {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+    }
+
+    /* Common Section Styles */
+    section {
+        padding: 6rem 0;
+        position: relative;
+    }
+
+    .section-header {
+        text-align: center;
+        margin-bottom: 4rem;
+    }
+
+    .section-header h2 {
+        font-size: 2.5rem;
+        color: white;
+        margin-bottom: 1rem;
+    }
+
+    .section-header h2::after {
+        content: '';
+        display: block;
+        width: 60px;
+        height: 3px;
+        background: var(--secondary);
+        margin: 15px auto 0;
+    }
+
+    .section-header p {
+        color: var(--text-muted);
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* About Section */
+    .about-section {
+        background-color: #0a0a0a;
+    }
+
+    .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+    }
+
+    .about-img img {
+        width: 100%;
+        border-radius: 10px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .about-content h3 {
+        font-size: 1.8rem;
+        color: var(--primary);
+        margin-bottom: 1.5rem;
+    }
+
+    .about-content p {
+        color: var(--text-muted);
+        margin-bottom: 1.5rem;
+        line-height: 1.8;
+    }
+
+    /* Team Section (Premium Carousel) */
+    .team-section {
+        background: linear-gradient(to bottom, #050505, #0a0a0a);
+        overflow: hidden;
+        padding-bottom: 80px;
+    }
+
+    /* Distinct Team Swiper Styling */
+    .teamSwiper {
+        width: 100%;
+        padding-top: 50px;
+        padding-bottom: 80px;
+    }
+
+    .team-slide {
+        background-position: center;
+        background-size: cover;
+        width: 300px;
+        height: 420px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 100px 100px 20px 20px;
+        /* Unique Arch Shape */
+        overflow: hidden;
+        position: relative;
+        transition: 0.5s;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .team-slide-active {
+        box-shadow: 0 0 50px rgba(45, 90, 163, 0.3);
+        border-color: var(--primary);
+        transform: scale(1.05);
+    }
+
+    .team-image-container {
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+
+    .team-image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: 0.5s;
+        filter: grayscale(20%);
+    }
+
+    .team-slide:hover .team-image-container img,
+    .team-slide-active .team-image-container img {
+        filter: grayscale(0%);
+        transform: scale(1.1);
+    }
+
+    /* Floating Info Card Overlay */
+    .team-overlay {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 85%;
+        background: rgba(0, 0, 0, 0.85);
+        /* Dark Glass */
+        padding: 1.2rem;
+        border-radius: 20px;
+        text-align: center;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: 0.4s;
+        z-index: 10;
+    }
+
+    .team-slide:hover .team-overlay {
+        bottom: 30px;
+        border-color: var(--primary);
+    }
+
+    .team-overlay h3 {
+        font-size: 1.2rem;
+        color: white;
+        margin: 0;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+    }
+
+    .team-overlay span {
+        display: block;
+        font-size: 0.8rem;
+        color: var(--secondary);
+        text-transform: uppercase;
+        margin-top: 5px;
+        font-weight: 600;
+        letter-spacing: 1px;
+    }
+
+    /* Hidden Socials Reveal */
+    .team-socials-reveal {
+        height: 0;
+        overflow: hidden;
+        transition: 0.4s;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        opacity: 0;
+    }
+
+    .team-slide:hover .team-socials-reveal {
+        height: 40px;
+        margin-top: 15px;
+        opacity: 1;
+    }
+
+    .team-icon {
+        color: white;
+        font-size: 1.2rem;
+        transition: 0.3s;
+    }
+
+    .team-icon:hover {
+        color: var(--primary);
+        transform: translateY(-3px);
+    }
+
+    /* Events Section (Premium Carousel) */
+    .events-section {
+        background-color: #0a0a0a;
+        overflow: hidden;
+        padding-bottom: 8rem;
+        /* More space for pagination */
+    }
+
+    .swiper {
+        width: 100%;
+        padding-top: 60px;
+        padding-bottom: 80px;
+    }
+
+    .swiper-slide {
+        background-position: center;
+        background-size: cover;
+        width: 380px;
+        height: 500px;
+        background: #151515;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        overflow: hidden;
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+        display: flex;
+        flex-direction: column;
+        transition: 0.5s;
+    }
+
+    .swiper-slide-active {
+        border-color: var(--primary);
+        box-shadow: 0 0 40px rgba(45, 90, 163, 0.4);
+    }
+
+    .event-img {
+        height: 55%;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .event-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: 0.5s;
+    }
+
+    .swiper-slide:hover .event-img img {
+        transform: scale(1.1);
+    }
+
+    .event-date-badge {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: rgba(0, 0, 0, 0.8);
+        padding: 10px 15px;
+        border-radius: 10px;
+        border: 1px solid var(--primary);
+        text-align: center;
+        backdrop-filter: blur(5px);
+    }
+
+    .event-date-badge span {
+        display: block;
+        line-height: 1;
+    }
+
+    .badge-month {
+        font-size: 0.8rem;
+        color: var(--primary);
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+
+    .badge-day {
+        font-size: 1.5rem;
+        color: white;
+        font-weight: 800;
+    }
+
+    .event-content {
+        padding: 2rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background: linear-gradient(to bottom, #151515, #0a0a0a);
+        position: relative;
+    }
+
+    .event-content::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 2rem;
+        right: 2rem;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    }
+
+    .event-title {
+        font-size: 1.5rem;
+        color: white;
+        margin-bottom: 0.5rem;
+        line-height: 1.3;
+    }
+
+    .event-desc {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .event-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .event-status {
+        font-size: 0.85rem;
+        color: var(--secondary);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .event-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.05);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        transition: 0.3s;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .event-btn:hover {
+        background: var(--primary);
+        transform: rotate(-45deg);
+    }
+
+    .swiper-pagination-bullet {
+        background: white;
+        opacity: 0.3;
+    }
+
+    .swiper-pagination-bullet-active {
+        background: var(--primary);
+        opacity: 1;
+    }
+
+    /* Contact Section */
+    .contact-section {
+        background: radial-gradient(circle at center, #111 0%, #000 100%);
+    }
+
+    .contact-form {
+        max-width: 600px;
+        margin: 0 auto;
+        background: var(--bg-card);
+        padding: 3rem;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 1rem;
+        background: #050505;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        color: white;
+    }
+
+    .form-control:focus {
+        outline: none;
+        border-color: var(--secondary);
+    }
+
+    @media (max-width: 900px) {
+        .about-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .team-slide {
+            width: 260px;
+            height: 380px;
+        }
+
+        .team-overlay {
+            bottom: 15px;
+            padding: 1rem;
+        }
+    }
 
 
-            <canvas id="canvas" style="position: absolute; top: 0; left: 0;"></canvas>
 
-            <!-- <div class="main-content">
-                <div class="main">
-                    <h1>Start Travelling <br><span>With Us</span> <br></h1>
-                    <p class="par">Pioneering the future of education with innovative technologies and personalized<br> learning experiences. 
-                    Our mission is to cultivate a culture of lifelong learning,<br> where students are equipped with the skills and knowledge to tackle complex <br>challenges and lead meaningful lives.Join us as we embark on a journey <br>to redefine education for the 21st century and beyond."</p>
-                    <br><button class="cn"><a href="#">GetStarted</a></button>
-                </div>
-                <div class="about-image ">
-                    <img src="https://www.logolynx.com/images/logolynx/5d/5dbc0a51fff9145bfe5c2b2cc1306467.jpeg" alt="photo" height="400px" width="400px">
-                </div>
-            </div> -->
 
-            <div class="main">
-                 <h1><span>I</span>NDIAN <span>S</span>OCIETY FOR <span>T</span>ECHNICAL  <span>E</span>DUCATION</h1>
-                 <div class="main-para">
-                    <p>Welcome to ISTE-KEC, a hub of innovation and collaboration. Here, we empower future engineers with the tools to lead, innovate, and make a lasting impact on the world. Join us in shaping tomorrow’s technology today.</p>
-                </div>
-                <div class="home-sci">
-                    <a href="https://www.instagram.com/iste_kec_?igsh=b3djY2Y5amRzZXFq"><i class='bx bxl-instagram'></i></a>
-                    <a href="#"><i class='bx bxl-linkedin-square' ></i></a>
-                    <a href="mailto:'istestudentschapterkec@gmail.com'"><i class='bx bx-envelope' ></i></a>
+    /* Events Section - allow overlap */
+    .events-section {
+        position: relative;
+        z-index: 10;
+        overflow: visible;
+        padding-bottom: 250px;
+        /* Reduced padding, rely on overlap, but keep some space */
+    }
+
+    /* Gallery Section - Coverflow Style */
+    .gallery-section {
+        background-color: #050505;
+        /* overflow: hidden; Removed to allow overlap if needed, but usually z-index handles it */
+        position: relative;
+        z-index: 5;
+        padding-bottom: 5rem;
+    }
+
+    .gallerySwiper {
+        width: 100%;
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+
+    .gallery-slide {
+        background-position: center;
+        background-size: cover;
+        width: 350px;
+        height: 250px;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: 0.5s;
+    }
+
+    .gallery-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: 0.5s;
+    }
+
+    .gallery-slide:hover img {
+        transform: scale(1.1);
+    }
+
+    @media (max-width: 600px) {
+        .gallery-slide {
+            width: 80%;
+            height: 220px;
+        }
+    }
+
+    /* Contact Card Style */
+    .contact-card {
+        transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease;
+    }
+
+    .contact-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(45, 90, 163, 0.2);
+        border-color: var(--primary) !important;
+    }
+
+    /* Timeline Styling - Static Horizontal Marvel Style */
+    .timeline {
+        position: relative;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 180px 0;
+        /* Increased space for pop-ups */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* The Central Line */
+    .timeline::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.1);
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        z-index: 0;
+    }
+
+    /* Progress Line (Dynamic) */
+    .timeline-progress {
+        position: absolute;
+        height: 4px;
+        background: linear-gradient(90deg, var(--secondary), var(--primary));
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        z-index: 1;
+        box-shadow: 0 0 20px var(--primary);
+        width: 0;
+        transition: width 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .timeline-item {
+        position: relative;
+        flex: 1;
+        /* Distribute space evenly */
+        text-align: center;
+        z-index: 1;
+        padding: 0;
+    }
+
+    /* The Node/Dot */
+    .timeline-item::after {
+        content: '';
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        background: var(--dark-bg);
+        border: 2px solid var(--secondary);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        z-index: 2;
+        transition: 0.3s ease;
+        box-shadow: 0 0 0 4px var(--dark-bg);
+    }
+
+    /* Hover State for Node */
+    /* Hover State for Node */
+    .timeline-item:hover::after {
+        background: var(--primary);
+        border-color: #fff;
+        transform: translate(-50%, -50%) scale(1.6);
+        box-shadow: 0 0 25px var(--primary), 0 0 15px var(--secondary);
+    }
+
+    /* Content Card Container */
+    .content {
+        position: absolute;
+        width: 200px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 10px;
+        background: transparent;
+        border: none;
+        transition: all 0.3s ease;
+        z-index: 3;
+    }
+
+    /* BRIDGE THE GAP: Ensure hover state persists when moving from dot to content */
+    /* Add an invisible touch area that connects the dot to the content */
+    .timeline-item:nth-child(odd)::before {
+        content: '';
+        position: absolute;
+        bottom: 50%;
+        /* Start from line */
+        left: 0;
+        width: 100%;
+        height: 50px;
+        /* Reach up to the content */
+        background: transparent;
+        z-index: 2;
+    }
+
+    .timeline-item:nth-child(even)::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        /* Start from line */
+        left: 0;
+        width: 100%;
+        height: 50px;
+        /* Reach down to the content */
+        background: transparent;
+        z-index: 2;
+    }
+
+    /* Alternating Placement */
+    .timeline-item:nth-child(odd) .content {
+        bottom: 30px;
+        /* Above line */
+        padding-bottom: 20px;
+    }
+
+    .timeline-item:nth-child(even) .content {
+        top: 30px;
+        /* Below line */
+        padding-top: 20px;
+    }
+
+    /* Connectors (Small lines to the main line) */
+    /* Connectors (Magical Vertical Line) */
+    .timeline-item .content::before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        width: 3px;
+        height: 0;
+        /* Star hidden */
+        background: linear-gradient(to top, var(--secondary), var(--primary));
+        transform: translateX(-50%);
+        transition: height 0.4s ease, box-shadow 0.4s ease;
+        box-shadow: 0 0 10px var(--primary);
+        z-index: -1;
+    }
+
+    /* Odd items (Above line) - Line grows upwards from bottom */
+    .timeline-item:nth-child(odd) .content::before {
+        bottom: -30px;
+        /* Start from line level roughly */
+        background: linear-gradient(to top, var(--secondary), var(--primary));
+    }
+
+    /* Even items (Below line) - Line grows downwards from top */
+    .timeline-item:nth-child(even) .content::before {
+        top: -30px;
+        /* Start from line level roughly */
+        background: linear-gradient(to bottom, var(--secondary), var(--primary));
+    }
+
+    /* HOVER - Expand Line */
+    .timeline-item:hover .content::before {
+        height: 50px;
+        /* Connect to dot */
+        box-shadow: 0 0 20px var(--primary), 0 0 10px white;
+    }
+
+    /* Text Styles */
+    .content h2 {
+        color: var(--text-white);
+        font-size: 0.9rem;
+        font-weight: 700;
+        margin: 0;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .content .date {
+        color: var(--primary);
+        font-size: 0.75rem;
+        font-weight: 600;
+        display: block;
+        margin-top: 5px;
+    }
+
+    /* Description (Hidden by default) */
+    .content p {
+        display: none;
+        font-size: 0.85rem;
+        color: #ccc;
+        margin-top: 10px;
+        line-height: 1.4;
+    }
+
+    /* HOVER INTERACTION - Pop Up Card */
+    /* HOVER INTERACTION - Pop Up Card with Spark */
+    .timeline-item:hover .content {
+        background: #111;
+        /* Solid dark background as requested "old pop-up style" */
+        border: 1px solid var(--primary);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
+        border-radius: 12px;
+        width: 300px;
+        padding: 25px;
+        z-index: 100 !important;
+        cursor: default;
+    }
+
+    /* Adjust text for visibility without background */
+    .timeline-item:hover .content h2 {
+        font-size: 1.2rem;
+        /* text-shadow: 0 0 10px rgba(0,0,0,0.8); */
+        color: var(--primary);
+    }
+
+    .timeline-item:hover .content p {
+        color: white;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 1);
+    }
+
+    /* Spark Effect Removed per user request ("did not like shiny background") */
+    .content::after {
+        display: none;
+    }
+
+    /* Adjust position on hover to center vertically relative to its original spot */
+    /* We keep left/transform centered. Just ensure it doesn't jump too wildly. */
+
+    .timeline-item:hover .content h2 {
+        font-size: 1.1rem;
+        white-space: normal;
+        /* Allow wrapping in expanded card */
+    }
+
+    .timeline-item:hover .content p {
+        display: block;
+        /* Reveal */
+        animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(5px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Mobile Responsive - Fallback to Vertical */
+    @media screen and (max-width: 900px) {
+        .timeline {
+            flex-direction: column;
+            padding: 40px 0;
+            display: block;
+            /* Back to block for vertical flow */
+            margin: 0;
+        }
+
+        .timeline::after {
+            width: 4px;
+            height: 100%;
+            top: 0;
+            left: 30px;
+            /* Left aligned line */
+            transform: none;
+        }
+
+        .timeline-item {
+            width: 100%;
+            text-align: left;
+            padding-left: 70px;
+            padding-right: 20px;
+            margin-bottom: 30px;
+            display: block;
+        }
+
+        .timeline-item::after {
+            left: 30px;
+            /* Match line */
+            top: 25px;
+            /* Align with top of card */
+            transform: translate(-50%, 0);
+        }
+
+        .timeline-item:hover::after {
+            transform: translate(-50%, 0) scale(1.3);
+        }
+
+        /* Reset Content for Mobile */
+        .content,
+        .timeline-item:nth-child(odd) .content,
+        .timeline-item:nth-child(even) .content {
+            position: relative;
+            left: auto;
+            right: auto;
+            top: auto;
+            bottom: auto;
+            transform: none;
+            width: 100%;
+            background: rgba(16, 20, 24, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .content::before,
+        .timeline-item:nth-child(odd) .content::before,
+        .timeline-item:nth-child(even) .content::before {
+            display: none;
+            /* No vertical connectors needed */
+        }
+
+        .content h2 {
+            font-size: 1.1rem;
+            white-space: normal;
+        }
+
+        .content p {
+            display: block;
+            /* Always show details on mobile? Or keep hidden? 
+                             Better to show basic details or use simple expansion. 
+                             Let's show them for usability. */
+            margin-top: 10px;
+            color: var(--text-muted);
+        }
+
+        /* Disable hover expansion effects on mobile to prevent layout jumping */
+        .timeline-item:hover .content {
+            width: 100%;
+            transform: none;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- Home / Hero -->
+<section id="home" class="hero d-flex align-items-center justify-content-center text-center">
+    <!-- Video Background -->
+    <video class="hero-video" autoplay muted loop playsinline>
+        <source src="{{ url_for('static', filename='videos/hero.mp4') }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <!-- Overlay -->
+    <div class="hero-overlay"></div>
+
+    <div class="container hero-content reveal">
+        <span class="hero-label d-block mb-3">Welcome To</span>
+        <h1 class="display-1 fw-bold mb-4">ISTE - KEC <span>STUDENT CHAPTER</span></h1>
+        <p class="lead text-light mb-5 mx-auto" style="max-width: 700px;">Kongu Engineering College - Fostering
+            innovation, leadership, and technical excellence.</p>
+        <div class="d-flex justify-content-center gap-3">
+            <a href="#about" class="btn btn-primary btn-lg rounded-pill px-5">Discover More</a>
+            <a href="#events" class="btn btn-outline-light btn-lg rounded-pill px-5">Upcoming Events</a>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="about-section py-5">
+    <div class="container py-5">
+        <div class="section-header text-center mb-5 reveal">
+            <h2 class="display-5 fw-bold text-white">About Us</h2>
+            <p class="text-secondary">Who we are and what we stand for.</p>
+        </div>
+
+        <div class="row align-items-center gy-5 reveal">
+            <div class="col-lg-6">
+                <div class="about-img position-relative">
+                    <img src="https://srmmcet.edu.in/wp-content/uploads/2023/12/Indian-Society-for-Technical-Education.webp"
+                        alt="ISTE Logo Large" class="img-fluid rounded-4 shadow-lg border border-secondary">
                 </div>
             </div>
-           
+            <div class="col-lg-6">
+                <div class="about-content ps-lg-4">
+                    <h3 class="h2 text-primary mb-4">Empowering Future Engineers</h3>
+                    <p class="text-secondary mb-4 lead">The Indian Society for Technical Education (ISTE) is the leading
+                        National Professional non-profit
+                        making Society for the Technical Education System in our country. We operate with the motto of
+                        Career Development of Teachers and Personality Development of Students.</p>
+                    <p class="text-secondary mb-5">At ISTE-KEC, we are a dynamic community committed to fostering
+                        technical excellence, professional
+                        growth, and innovative thinking among students. Being a part of ISTE-KEC opens doors to a vast
+                        network of professionals and opportunities.</p>
+                    <a href="#team" class="btn btn-outline-primary rounded-pill px-4">Meet Our Team</a>
+                </div>
+            </div>
         </div>
-    
-        
+    </div>
+</section>
 
-        <script src="{{ url_for('static', filename='main.js') }}"></script>
-        <script>
-            hamburger = document.querySelector(".hamburger");
-            hamburger.onclick = function(){
-                navBar = document.querySelector(".nav-bar");
-                navBar.classList.toggle("active");
-            }
-        </script>
-    </body>
-</html>
+<!-- Team Section -->
+<section id="team" class="team-section py-5">
+    <div class="container py-5">
+        <div class="section-header text-center mb-5 reveal">
+            <h2 class="display-5 fw-bold text-white">Our Team</h2>
+            <p class="text-secondary">The dedicated individuals behind our chapter.</p>
+        </div>
+
+        <!-- Team Swiper -->
+        <div class="swiper teamSwiper reveal px-2">
+            <div class="swiper-wrapper">
+
+
+                <!-- Chairperson -->
+                <div class="swiper-slide team-slide">
+                    <div class="team-image-container">
+                        <img src="{{ url_for('static', filename='images/team/bharath_nk.png') }}" alt="Bharath N K">
+                    </div>
+                    <div class="team-overlay">
+                        <h3>Bharath N K</h3>
+                        <span>Chairperson</span>
+                        <div class="team-socials-reveal">
+                            <a href="#" class="team-icon"><i class='bx bxl-linkedin'></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vice Chairperson -->
+                <div class="swiper-slide team-slide">
+                    <div class="team-image-container">
+                        <img src="{{ url_for('static', filename='images/team/induja_v.jpg') }}" alt="Induja V">
+                    </div>
+                    <div class="team-overlay">
+                        <h3>Induja V</h3>
+                        <span>Vice Chairperson</span>
+                        <div class="team-socials-reveal">
+                            <a href="#" class="team-icon"><i class='bx bxl-linkedin'></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide team-slide">
+                    <div class="team-image-container">
+                        <img src="{{ url_for('static', filename='images/team/sharni_k.jpg') }}" alt="Sharni K">
+                    </div>
+                    <div class="team-overlay">
+                        <h3>Sharni K</h3>
+                        <span>Vice Chairperson</span>
+                        <div class="team-socials-reveal">
+                            <a href="#" class="team-icon"><i class='bx bxl-linkedin'></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Join Secretary -->
+                <div class="swiper-slide team-slide">
+                    <div class="team-image-container">
+                        <img src="{{ url_for('static', filename='images/team/mukesh_ge.jpg') }}" alt="Mukesh G E">
+                    </div>
+                    <div class="team-overlay">
+                        <h3>Mukesh G E</h3>
+                        <span>Join Secretary</span>
+                        <div class="team-socials-reveal">
+                            <a href="#" class="team-icon"><i class='bx bxl-linkedin'></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Secretary -->
+                <div class="swiper-slide team-slide">
+                    <div class="team-image-container">
+                        <img src="{{ url_for('static', filename='images/team/sahana_varsini_s.jpg') }}"
+                            alt="Sahana Varsini S">
+                    </div>
+                    <div class="team-overlay">
+                        <h3>Sahana Varsini S</h3>
+                        <span>Additional Secretary</span>
+                        <div class="team-socials-reveal">
+                            <a href="#" class="team-icon"><i class='bx bxl-linkedin'></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Treasurer -->
+                <div class="swiper-slide team-slide">
+                    <div class="team-image-container">
+                        <img src="{{ url_for('static', filename='images/team/abhinaya_ps.jpg') }}" alt="Abhinaya P S">
+                    </div>
+                    <div class="team-overlay">
+                        <h3>Abhinaya P S</h3>
+                        <span>Treasurer</span>
+                        <div class="team-socials-reveal">
+                            <a href="#" class="team-icon"><i class='bx bxl-linkedin'></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Treasurer -->
+                <div class="swiper-slide team-slide">
+                    <div class="team-image-container">
+                        <img src="{{ url_for('static', filename='images/team/naveen_s.jpg') }}" alt="Naveen S">
+                    </div>
+                    <div class="team-overlay">
+                        <h3>Naveen S</h3>
+                        <span>Additional Treasurer</span>
+                        <div class="team-socials-reveal">
+                            <a href="#" class="team-icon"><i class='bx bxl-linkedin'></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Media Head -->
+                <div class="swiper-slide team-slide">
+                    <div class="team-image-container">
+                        <img src="{{ url_for('static', filename='images/team/dharshini_p.jpg') }}" alt="Dharshini P">
+                    </div>
+                    <div class="team-overlay">
+                        <h3>Dharshini P</h3>
+                        <span>Media Head</span>
+                        <div class="team-socials-reveal">
+                            <a href="#" class="team-icon"><i class='bx bxl-linkedin'></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Document Head -->
+                <div class="swiper-slide team-slide">
+                    <div class="team-image-container">
+                        <img src="{{ url_for('static', filename='images/team/harini_g.jpg') }}" alt="Harini G">
+                    </div>
+                    <div class="team-overlay">
+                        <h3>Harini G</h3>
+                        <span>Document Head</span>
+                        <div class="team-socials-reveal">
+                            <a href="#" class="team-icon"><i class='bx bxl-linkedin'></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide team-slide">
+                    <div class="team-image-container">
+                        <img src="{{ url_for('static', filename='images/team/kabilan_a.jpg') }}" alt="Kabilan A">
+                    </div>
+                    <div class="team-overlay">
+                        <h3>Kabilan A</h3>
+                        <span>Document Head</span>
+                        <div class="team-socials-reveal">
+                            <a href="#" class="team-icon"><i class='bx bxl-linkedin'></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide team-slide">
+                    <div class="team-image-container">
+                        <img src="{{ url_for('static', filename='images/team/sanjay_ts.jpg') }}" alt="Sanjay T S">
+                    </div>
+                    <div class="team-overlay">
+                        <h3>Sanjay T S</h3>
+                        <span>Document Head</span>
+                        <div class="team-socials-reveal">
+                            <a href="#" class="team-icon"><i class='bx bxl-linkedin'></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event Management Head -->
+                <div class="swiper-slide team-slide">
+                    <div class="team-image-container">
+                        <img src="{{ url_for('static', filename='images/team/divyasri_u.jpg') }}" alt="DivyaSri U">
+                    </div>
+                    <div class="team-overlay">
+                        <h3>DivyaSri U</h3>
+                        <span>Event Mgmt Head</span>
+                        <div class="team-socials-reveal">
+                            <a href="#" class="team-icon"><i class='bx bxl-linkedin'></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide team-slide">
+                    <div class="team-image-container">
+                        <img src="{{ url_for('static', filename='images/team/rithanya_s.jpg') }}" alt="Rithanya S">
+                    </div>
+                    <div class="team-overlay">
+                        <h3>Rithanya S</h3>
+                        <span>Event Mgmt Head</span>
+                        <div class="team-socials-reveal">
+                            <a href="#" class="team-icon"><i class='bx bxl-linkedin'></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide team-slide">
+                    <div class="team-image-container">
+                        <img src="{{ url_for('static', filename='images/team/krithik_r.jpg') }}" alt="Krithik R">
+                    </div>
+                    <div class="team-overlay">
+                        <h3>Krithik R</h3>
+                        <span>Event Mgmt Head</span>
+                        <div class="team-socials-reveal">
+                            <a href="#" class="team-icon"><i class='bx bxl-linkedin'></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Executive Head -->
+                <div class="swiper-slide team-slide">
+                    <div class="team-image-container">
+                        <img src="{{ url_for('static', filename='images/team/tamilarasi_p.jpg') }}" alt="Tamilarasi P">
+                    </div>
+                    <div class="team-overlay">
+                        <h3>Tamilarasi P</h3>
+                        <span>Executive Head</span>
+                        <div class="team-socials-reveal">
+                            <a href="#" class="team-icon"><i class='bx bxl-linkedin'></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide team-slide">
+                    <div class="team-image-container">
+                        <img src="{{ url_for('static', filename='images/team/sathyaa_s.jpg') }}" alt="Sathyaa S">
+                    </div>
+                    <div class="team-overlay">
+                        <h3>Sathyaa S</h3>
+                        <span>Executive Head</span>
+                        <div class="team-socials-reveal">
+                            <a href="#" class="team-icon"><i class='bx bxl-linkedin'></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide team-slide">
+                    <div class="team-image-container">
+                        <img src="{{ url_for('static', filename='images/team/kavyasri_v.jpg') }}" alt="KavyaSri V">
+                    </div>
+                    <div class="team-overlay">
+                        <h3>KavyaSri V</h3>
+                        <span>Executive Head</span>
+                        <div class="team-socials-reveal">
+                            <a href="#" class="team-icon"><i class='bx bxl-linkedin'></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Media Team -->
+                <div class="swiper-slide team-slide">
+                    <div class="team-image-container">
+                        <img src="{{ url_for('static', filename='images/team/jestin_a.jpg') }}" alt="Jestin A">
+                    </div>
+                    <div class="team-overlay">
+                        <h3>Jestin A</h3>
+                        <span>Media Team</span>
+                        <div class="team-socials-reveal">
+                            <a href="#" class="team-icon"><i class='bx bxl-linkedin'></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide team-slide">
+                    <div class="team-image-container">
+                        <img src="{{ url_for('static', filename='images/team/guruprasath_sb.jpg') }}"
+                            alt="GuruPrasath S B">
+                    </div>
+                    <div class="team-overlay">
+                        <h3>GuruPrasath S B</h3>
+                        <span>Media Team</span>
+                        <div class="team-socials-reveal">
+                            <a href="#" class="team-icon"><i class='bx bxl-linkedin'></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide team-slide">
+                    <div class="team-image-container">
+                        <img src="{{ url_for('static', filename='images/team/praveen_kumar_m.jpg') }}"
+                            alt="Praveen Kumar M">
+                    </div>
+                    <div class="team-overlay">
+                        <h3>Praveen Kumar M</h3>
+                        <span>Media Team</span>
+                        <div class="team-socials-reveal">
+                            <a href="#" class="team-icon"><i class='bx bxl-linkedin'></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event Management Team -->
+                <div class="swiper-slide team-slide">
+                    <div class="team-image-container">
+                        <img src="{{ url_for('static', filename='images/team/kishore_rs.jpg') }}" alt="Kishore R S">
+                    </div>
+                    <div class="team-overlay">
+                        <h3>Kishore R S</h3>
+                        <span>Event Mgmt Team</span>
+                        <div class="team-socials-reveal">
+                            <a href="#" class="team-icon"><i class='bx bxl-linkedin'></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide team-slide">
+                    <div class="team-image-container">
+                        <img src="{{ url_for('static', filename='images/team/sudha_m.jpg') }}" alt="Sudha M"
+                            style="object-position: top;">
+                    </div>
+                    <div class="team-overlay">
+                        <h3>Sudha M</h3>
+                        <span>Event Mgmt Team</span>
+                        <div class="team-socials-reveal">
+                            <a href="#" class="team-icon"><i class='bx bxl-linkedin'></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide team-slide">
+                    <div class="team-image-container">
+                        <img src="{{ url_for('static', filename='images/team/asvitha_rm.jpg') }}" alt="ASVITHA.R.M.">
+                    </div>
+                    <div class="team-overlay">
+                        <h3>ASVITHA.R.M.</h3>
+                        <span>Event Mgmt Team</span>
+                        <div class="team-socials-reveal">
+                            <a href="#" class="team-icon"><i class='bx bxl-linkedin'></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Document Team -->
+                <div class="swiper-slide team-slide">
+                    <div class="team-image-container">
+                        <img src="{{ url_for('static', filename='images/team/atchaya_a.jpg') }}" alt="Atchaya A">
+                    </div>
+                    <div class="team-overlay">
+                        <h3>Atchaya A</h3>
+                        <span>Document Team</span>
+                        <div class="team-socials-reveal">
+                            <a href="#" class="team-icon"><i class='bx bxl-linkedin'></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sudheeksha S (Missing Image Placeholder check or use existing if user adds it later) -->
+                <!-- Assuming user might add it, or we use a placeholder if I didn't find it. I will enable it assuming I might have missed it or user will upload -->
+                <div class="swiper-slide team-slide">
+                    <div class="team-image-container">
+                        <img src="{{ url_for('static', filename='images/team/default_profile_f.png') }}"
+                            alt="Sudheeksha S" onerror="this.src='https://via.placeholder.com/300x420?text=No+Image'">
+                    </div>
+                    <div class="team-overlay">
+                        <h3>Sudheeksha S</h3>
+                        <span>Document Team</span>
+                        <div class="team-socials-reveal">
+                            <a href="#" class="team-icon"><i class='bx bxl-linkedin'></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide team-slide">
+                    <div class="team-image-container">
+                        <img src="{{ url_for('static', filename='images/team/harini_m.jpg') }}" alt="Harini M">
+                    </div>
+                    <div class="team-overlay">
+                        <h3>Harini M</h3>
+                        <span>Document Team</span>
+                        <div class="team-socials-reveal">
+                            <a href="#" class="team-icon"><i class='bx bxl-linkedin'></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide team-slide">
+                    <div class="team-image-container">
+                        <img src="{{ url_for('static', filename='images/team/rubiga_d.jpg') }}" alt="Rubiga D">
+                    </div>
+                    <div class="team-overlay">
+                        <h3>Rubiga D</h3>
+                        <span>Document Team</span>
+                        <div class="team-socials-reveal">
+                            <a href="#" class="team-icon"><i class='bx bxl-linkedin'></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Executive Team -->
+                <div class="swiper-slide team-slide">
+                    <div class="team-image-container">
+                        <img src="{{ url_for('static', filename='images/team/jagadeesh_sk.jpg') }}" alt="Jagadeesh S K">
+                    </div>
+                    <div class="team-overlay">
+                        <h3>Jagadeesh S K</h3>
+                        <span>Executive Team</span>
+                        <div class="team-socials-reveal">
+                            <a href="#" class="team-icon"><i class='bx bxl-linkedin'></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide team-slide">
+                    <div class="team-image-container">
+                        <img src="{{ url_for('static', filename='images/team/bharat_hari_s.jpg') }}"
+                            alt="BHARAT HARI S">
+                    </div>
+                    <div class="team-overlay">
+                        <h3>BHARAT HARI S</h3>
+                        <span>Executive Team</span>
+                        <div class="team-socials-reveal">
+                            <a href="#" class="team-icon"><i class='bx bxl-linkedin'></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide team-slide">
+                    <div class="team-image-container">
+                        <img src="{{ url_for('static', filename='images/team/udhayanithi_s.jpg') }}"
+                            alt="UDHAYANITHI S">
+                    </div>
+                    <div class="team-overlay">
+                        <h3>UDHAYANITHI S</h3>
+                        <span>Executive Team</span>
+                        <div class="team-socials-reveal">
+                            <a href="#" class="team-icon"><i class='bx bxl-linkedin'></i></a>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- Optional Pagination for Team -->
+        </div>
+    </div>
+</section>
+
+<!-- Events Section (Timeline) -->
+<section id="events" class="events-section py-5">
+    <div class="container py-5">
+        <div class="section-header text-center mb-5 reveal">
+            <h2 class="display-5 fw-bold text-white">EVENTS</h2>
+            <p class="text-secondary">A journey through our milestones and upcoming activities.</p>
+        </div>
+
+        <div class="timeline mx-auto" id="homeTimeline">
+            <div class="timeline-progress" id="timelineProgress"></div>
+
+            <!-- Inauguration -->
+            <div class="timeline-item left reveal">
+                <div class="content">
+                    <h2 class="h4 text-secondary mb-2">Inaugural</h2>
+                    <span class="date d-block text-white-50 small fw-bold mb-3">2nd Aug 2025</span>
+                    <p class="text-secondary mb-3">Official inauguration of the ISTE Student Chapter. Join us as we
+                        kickstart a year of innovation and learning.</p>
+                </div>
+            </div>
+
+            <!-- PREP2PLACE -->
+            <div class="timeline-item right reveal">
+                <div class="content">
+                    <h2 class="h4 text-secondary mb-2">PREP2PLACE – UNLOCK YOUR CAREER VOLUME 1.0</h2>
+                    <span class="date d-block text-white-50 small fw-bold mb-3">7th Aug 2025</span>
+                    <p class="text-secondary mb-3">(For AI, AUTO, ECE, EEE, EIE)<br>A Guidance Programme by the seniors
+                        and the one to one interaction
+                        between senior and junior.</p>
+                </div>
+            </div>
+
+            <!-- PREP2PLACE 1.1 -->
+            <div class="timeline-item left reveal">
+                <div class="content">
+                    <h2 class="h4 text-secondary mb-2">Prep2place – Unlock Your Carrer (1.1)</h2>
+                    <span class="date d-block text-white-50 small fw-bold mb-3">13th Aug 2025</span>
+                    <p class="text-secondary mb-3">(For CSD, CSE, IT, MECHNICAL, MECHATRONICS, CIVIL)<br>A Guidance
+                        Programme by the seniors and the one to one interaction
+                        between senior and junior.</p>
+                </div>
+            </div>
+
+            <!-- PREP2PLACE 1.2 -->
+            <div class="timeline-item right reveal">
+                <div class="content">
+                    <h2 class="h4 text-secondary mb-2">Prep2place – Unlock Your Carrer Volume 1.2</h2>
+                    <span class="date d-block text-white-50 small fw-bold mb-3">29th & 30th Aug 2025</span>
+                    <p class="text-secondary mb-3">An Frontend and Backend Workshop to get hands-on experience in
+                        developing and deploying an website by the seniors</p>
+                </div>
+            </div>
+
+            <!-- PREP2PLACE 1.3 -->
+            <div class="timeline-item left reveal">
+                <div class="content">
+                    <h2 class="h4 text-secondary mb-2">Prep2place – Unlock Your Carrer Volume 1.3</h2>
+                    <span class="date d-block text-white-50 small fw-bold mb-3">2nd Sep 2025</span>
+                    <p class="text-secondary mb-3">(For EEE, ECE and EIE)<br>A Guidance Programme by the seniors and the
+                        one to one interaction between senior and junior.</p>
+                </div>
+            </div>
+
+            <!-- EXODIA 2K25 -->
+            <div class="timeline-item right reveal">
+                <div class="content">
+                    <h2 class="h4 text-secondary mb-2">EXODIA 2K25 - An 30 Hours Hackathon</h2>
+                    <span class="date d-block text-white-50 small fw-bold mb-3">Sep 27-28, 2025</span>
+                    <p class="text-secondary mb-3">A thrilling 30-hour non-stop hackathon challenging participants to
+                        solve real-world problems. Collaborate, innovate, and code your way to victory while showcasing
+                        your technical prowess.</p>
+                </div>
+            </div>
+
+            <!-- EXODIA 2K25 (Symposium) -->
+            <div class="timeline-item left reveal">
+                <div class="content">
+                    <h2 class="h4 text-secondary mb-2">EXODIA 2K25 - Intra College Symposium</h2>
+                    <span class="date d-block text-white-50 small fw-bold mb-3">3rd Jan 2026</span>
+                    <p class="text-secondary mb-3">An Intra College Symposium featuring a series of technical and
+                        non-technical events. A platform to exhibit talents, compete, and learn from the best minds in
+                        the college.</p>
+                </div>
+            </div>
+
+            <!-- AVENTURO 2K26 -->
+            <div class="timeline-item right reveal">
+                <div class="content">
+                    <h2 class="h4 text-secondary mb-2">AVENTURO 2K26 - An Inter-college National level Symposium</h2>
+                    <span class="date d-block text-white-50 small fw-bold mb-3">Coming Soon</span>
+                    <p class="text-secondary mb-3">Get ready for the grandest event of the year! A national-level
+                        platform to showcase your technical prowess, network with peers from across the country, and
+                        participate in exciting workshops and competitions.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Gallery Section -->
+<section id="gallery" class="gallery-section py-5">
+    <div class="container py-5">
+        <div class="section-header text-center mb-5 reveal">
+            <h2 class="display-5 fw-bold text-white">Event Gallery</h2>
+            <p class="text-secondary">Capture the moments. Cherish the memories.</p>
+        </div>
+
+        <div class="swiper gallerySwiper reveal">
+            <div class="swiper-wrapper">
+                <!-- Loop through gallery images -->
+                {% for i in range(1, 24) %}
+                <div class="swiper-slide gallery-slide">
+                    <img src="{{ url_for('static', filename='images/gallery/gallery_' ~ i ~ '.jpg') }}"
+                        alt="Gallery Image {{ i }}" loading="lazy">
+                </div>
+                {% endfor %}
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="contact-section py-5">
+    <div class="container py-5">
+        <div class="section-header text-center mb-5 reveal">
+            <h2 class="display-5 fw-bold text-white">Contact Us</h2>
+            <p class="text-secondary">Connect with our team for any queries.</p>
+        </div>
+
+        <!-- Faculty Coordinators -->
+        <div class="row justify-content-center g-4 mb-5 reveal">
+            <h3 class="text-center text-primary mb-4 h4 text-uppercase tracking-wide">Faculty Coordinators</h3>
+            <div class="col-md-5">
+                <div
+                    class="contact-card p-4 rounded-4 bg-dark border border-secondary text-center h-100 placeholder-wave">
+                    <div class="mb-3">
+                        <i class='bx bxs-user-circle fs-1 text-white opacity-50'></i>
+                    </div>
+                    <h4 class="text-white h5 fw-bold mb-1">Dr.P.RAVICHANDRAN ME.,Ph.D.</h4>
+                    <p class="text-secondary small text-uppercase mb-3 fw-bold">Faculty Coordinator</p>
+                    <div class="d-flex justify-content-center gap-3 text-white small">
+                        <span><i class='bx bxs-phone text-primary'></i> +91 99659 98989</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div
+                    class="contact-card p-4 rounded-4 bg-dark border border-secondary text-center h-100 placeholder-wave">
+                    <div class="mb-3">
+                        <i class='bx bxs-user-circle fs-1 text-white opacity-50'></i>
+                    </div>
+                    <h4 class="text-white h5 fw-bold mb-1">Mr. A. Ganesh M.Tech</h4>
+                    <p class="text-secondary small text-uppercase mb-3 fw-bold">Faculty Coordinator</p>
+                    <div class="d-flex justify-content-center gap-3 text-white small">
+                        <span><i class='bx bxs-phone text-primary'></i> +91 95785 05841</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Student Coordinators -->
+        <div class="row justify-content-center g-4 reveal">
+            <h3 class="text-center text-primary mb-4 h4 text-uppercase tracking-wide">Student Coordinators</h3>
+            <div class="col-md-4">
+                <div
+                    class="contact-card p-4 rounded-4 bg-dark border border-secondary text-center h-100 placeholder-wave">
+                    <div class="mb-3">
+                        <i class='bx bxs-user fs-1 text-white opacity-50'></i>
+                    </div>
+                    <h4 class="text-white h5 fw-bold mb-1">MR. N.K.BHARATH</h4>
+                    <p class="text-secondary small text-uppercase mb-3 fw-bold">Chairperson</p>
+                    <div class="d-flex flex-column gap-2 text-white small">
+                        <span><i class='bx bxs-phone text-primary'></i> +91 80722 95598</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div
+                    class="contact-card p-4 rounded-4 bg-dark border border-secondary text-center h-100 placeholder-wave">
+                    <div class="mb-3">
+                        <i class='bx bxs-user fs-1 text-white opacity-50'></i>
+                    </div>
+                    <h4 class="text-white h5 fw-bold mb-1">MS. K. SHARNI</h4>
+                    <p class="text-secondary small text-uppercase mb-3 fw-bold">Secretary</p>
+                    <div class="d-flex flex-column gap-2 text-white small">
+                        <span><i class='bx bxs-phone text-primary'></i> +91 77080 42415</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div
+                    class="contact-card p-4 rounded-4 bg-dark border border-secondary text-center h-100 placeholder-wave">
+                    <div class="mb-3">
+                        <i class='bx bxs-user fs-1 text-white opacity-50'></i>
+                    </div>
+                    <h4 class="text-white h5 fw-bold mb-1">MS. P.S. ABHINAYA</h4>
+                    <p class="text-secondary small text-uppercase mb-3 fw-bold">Treasurer</p>
+                    <div class="d-flex flex-column gap-2 text-white small">
+                        <span><i class='bx bxs-phone text-primary'></i> +91 86672 35579</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<!-- Initialize Swiper -->
+<script>
+    // Timeline Progress Animation
+    document.addEventListener('DOMContentLoaded', () => {
+        const timeline = document.getElementById('homeTimeline');
+        if (timeline) {
+            const progressLine = document.getElementById('timelineProgress');
+            const items = timeline.querySelectorAll('.timeline-item');
+            const totalItems = items.length;
+
+            items.forEach((item, index) => {
+                item.addEventListener('mouseenter', () => {
+                    // Calculate width percentage to reach the CENTER of the current item
+                    // Items are flex: 1, so each takes 1/total width.
+                    // Node is at 50% of the item.
+                    // Position = (index + 0.5) * (100 / totalItems)
+
+                    let percent = 0;
+                    if (totalItems > 0) {
+                        percent = ((index + 0.5) / totalItems) * 100;
+                    }
+                    progressLine.style.width = `${percent}%`;
+                });
+            });
+
+            timeline.addEventListener('mouseleave', () => {
+                progressLine.style.width = '0%';
+            });
+        }
+    });
+
+    // Team Swiper (Cards Stack or Standard with effect)
+    var teamSwiper = new Swiper(".teamSwiper", {
+        effect: "coverflow",
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: "auto",
+        coverflowEffect: {
+            rotate: 0,
+            stretch: 0,
+            depth: 100,
+            modifier: 2.5,
+            slideShadows: true,
+        },
+        loop: true,
+        autoplay: {
+            delay: 2500,
+            disableOnInteraction: false,
+        },
+    });
+
+    // Gallery Swiper
+    var gallerySwiper = new Swiper(".gallerySwiper", {
+        effect: "coverflow",
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: "auto",
+        coverflowEffect: {
+            rotate: 20,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows: true,
+        },
+        loop: true,
+        autoplay: {
+            delay: 2000,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: ".swiper-pagination",
+            dynamicBullets: true,
+        },
+    });
+
+    // Fix anchor scrolling with fixed header
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
+{% endblock %}

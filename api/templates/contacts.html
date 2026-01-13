@@ -1,64 +1,225 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='contact.css') }}">
-    
-</head>
-<body>
-    <div class="contacts">
-        <div class="container">
-            <div class="text-content">
-                <h2>FACULTY COORDINATORS</h2>
+{% extends 'base.html' %}
+
+{% block title %}Contact Us - ISTE KEC{% endblock %}
+
+{% block head %}
+<style>
+    .contact-container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 5rem auto;
+        display: flex;
+        gap: 4rem;
+        align-items: flex-start;
+    }
+
+    .contact-info {
+        flex: 1;
+    }
+
+    .contact-info h1 {
+        font-size: 3rem;
+        background: var(--gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 1.5rem;
+    }
+
+    .contact-info p {
+        color: var(--text-muted);
+        margin-bottom: 3rem;
+        font-size: 1.1rem;
+    }
+
+    .info-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        background: var(--card-bg);
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        transition: 0.3s;
+    }
+
+    .info-item:hover {
+        transform: translateX(10px);
+        border-color: var(--primary);
+    }
+
+    .info-icon {
+        width: 50px;
+        height: 50px;
+        background: rgba(99, 102, 241, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: var(--primary);
+        margin-right: 1.5rem;
+    }
+
+    .info-content h3 {
+        font-size: 1.1rem;
+        color: white;
+        margin-bottom: 0.3rem;
+    }
+
+    .info-content span {
+        color: var(--text-muted);
+    }
+
+    .contact-form-wrapper {
+        flex: 1;
+        background: var(--card-bg);
+        padding: 3rem;
+        border-radius: 20px;
+        border: 1px solid var(--border);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+        display: block;
+        color: white;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 1rem;
+        background: var(--dark-bg);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: white;
+        font-family: 'Inter', sans-serif;
+        transition: 0.3s;
+    }
+
+    .form-control:focus {
+        outline: none;
+        border-color: var(--secondary);
+        box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.2);
+    }
+
+    textarea.form-control {
+        min-height: 150px;
+        resize: vertical;
+    }
+
+    .submit-btn {
+        width: 100%;
+        padding: 1rem;
+        background: var(--gradient);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.3s;
+        font-size: 1rem;
+    }
+
+    .submit-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+    }
+
+    @media (max-width: 900px) {
+        .contact-container {
+            flex-direction: column;
+        }
+
+        .contact-form-wrapper {
+            width: 100%;
+            padding: 2rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5 reveal">
+    <div class="row gy-5 align-items-start mt-4">
+
+        <!-- Contact Info Column -->
+        <div class="col-lg-5">
+            <h1 class="display-3 fw-bold mb-4"
+                style="background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                Get In Touch</h1>
+            <p class="lead text-secondary mb-5">Have questions or want to collaborate? Reach out to us and let's build
+                something amazing together.</p>
+
+            <div class="d-flex align-items-center mb-4 p-4 rounded-4 bg-dark border border-secondary transition-hover">
+                <div class="info-icon flex-shrink-0 d-flex align-items-center justify-content-center rounded-circle text-primary bg-primary bg-opacity-25 me-4"
+                    style="width: 50px; height: 50px; font-size: 1.5rem;">
+                    <i class='bx bx-current-location'></i>
+                </div>
+                <div>
+                    <h3 class="h5 fw-bold text-white mb-1">Our Location</h3>
+                    <span class="text-secondary text-break">Kongu Engineering College, Erode, TN</span>
+                </div>
+            </div>
+
+            <div class="d-flex align-items-center mb-4 p-4 rounded-4 bg-dark border border-secondary transition-hover">
+                <div class="info-icon flex-shrink-0 d-flex align-items-center justify-content-center rounded-circle text-primary bg-primary bg-opacity-25 me-4"
+                    style="width: 50px; height: 50px; font-size: 1.5rem;">
+                    <i class='bx bx-envelope'></i>
+                </div>
+                <div>
+                    <h3 class="h5 fw-bold text-white mb-1">Email Us</h3>
+                    <span class="text-secondary text-break">istestudentschapterkec@gmail.com</span>
+                </div>
+            </div>
+
+            <div class="d-flex align-items-center mb-4 p-4 rounded-4 bg-dark border border-secondary transition-hover">
+                <div class="info-icon flex-shrink-0 d-flex align-items-center justify-content-center rounded-circle text-primary bg-primary bg-opacity-25 me-4"
+                    style="width: 50px; height: 50px; font-size: 1.5rem;">
+                    <i class='bx bxl-instagram'></i>
+                </div>
+                <div>
+                    <h3 class="h5 fw-bold text-white mb-1">Follow Us</h3>
+                    <span class="text-secondary">@iste_kec_</span>
+                </div>
             </div>
         </div>
-        <div class="container">
-            <div class="card">
-                <h3>Dr.P.RAVICHANDRAN ME.,Ph.D.</h3>
-                <h3>Faculty Coordinator</h3>
-                <p><i class='bx bx-phone'></i> +91 9965998989</a><br>
-                    <br>
-                    <!-- <a href= "mailto:'ranjithrajendran2510@gmail.com'"><i class='bx bx-envelope' ></i></a></p> -->
-            </div>
-            <div class="card">
-                <h3>Mr. A. Ganesh M.Tech</h3>
-                <h3>Faculty Coordinator</h3>
-                <p><i class='bx bx-phone'></i> +91 9578505841</a><br>
-                    <br>
-                    <!-- <a href= "mailto:'ranjithrajendran2510@gmail.com'"><i class='bx bx-envelope' ></i></a></p> -->
-            </div>
-        </div>
-        <div class="container">
-            <div class="text-content">
-                <h2>STUDENT COORDINATORS</h2>
-            </div>
-        </div>
-        <div class="container">
-            <div class="card">
-                <h3>MR. N.K.BHARATH</h3>
-                <h3>Chairperson</h3>
-                <p><i class='bx bx-phone'></i> +91 8072295598 </a><br>
-                    <br>
-                    <a href= "mailto:'bharathnk.22aim@kongu.edu'"><i class='bx bx-envelope' ></i></a></p>
-            </div>
-            <div class="card">
-                <h3>MS. K. SHARNI</h3>
-                <h3>SECRETARY</h3>
-                <p><i class='bx bx-phone'></i> +91 7708042415 </a><br>
-                    <br>
-                    <a href= "mailto:'sharnik.22csd@kongu.edu'"><i class='bx bx-envelope' ></i></a></p>
-            </div>
-            <div class="card">
-                <h3>MS. P.S. ABHINAYA</h3>
-                <h3>TREASURER</h3>
-                <p><i class='bx bx-phone'></i> +91 8667235579 </a><br>
-                    <br>
-                    <a href= "mailto:'abhinayaps.22cse@kongu.edu'"><i class='bx bx-envelope' ></i></a></p>
+
+        <!-- Contact Form Column -->
+        <div class="col-lg-7">
+            <div class="contact-form-wrapper bg-dark p-5 rounded-4 border border-secondary shadow-lg">
+                <form>
+                    <div class="mb-4">
+                        <label class="form-label text-white fw-bold mb-2">Name</label>
+                        <input type="text"
+                            class="form-control form-control-lg bg-black text-white border-secondary focus-ring"
+                            placeholder="Your Name">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label text-white fw-bold mb-2">Email</label>
+                        <input type="email"
+                            class="form-control form-control-lg bg-black text-white border-secondary focus-ring"
+                            placeholder="your@email.com">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label text-white fw-bold mb-2">Message</label>
+                        <textarea class="form-control form-control-lg bg-black text-white border-secondary focus-ring"
+                            rows="6" placeholder="How can we help?"></textarea>
+                    </div>
+
+                    <button type="submit"
+                        class="btn btn-primary btn-lg w-100 rounded-pill fw-bold shadow-lg transition-transform">Send
+                        Message</button>
+                </form>
             </div>
         </div>
+
     </div>
-</body>
-</html>
+</div>
+{% endblock %}

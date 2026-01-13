@@ -1,40 +1,61 @@
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>About</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='timeline.css') }}">
-    </head>
-    <body>
-        <h1 class="title">EVENTS-2K24</h1>
-        <section class="time-line">
-            <div class="container" style="--dly:1s">
-                <div class="text-content">
-                    <h2>Inaugural Ceremony</h2>
-                    <p>Guest: Dr. S. NITHYANANDHAM Ph.D <br>CEO Barani Ferrocast Pvt Ltd</p>
-                </div>
+{% extends 'base.html' %}
+
+{% block title %}Events - ISTE KEC{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/timeline.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="events-header reveal text-center py-5">
+    <div class="container">
+        <h1 class="display-3 fw-bold mb-3">
+            Events Timeline</h1>
+        <p class="lead text-secondary">A journey through our milestones and upcoming activities.</p>
+    </div>
+</div>
+
+<div class="container py-5">
+    <div class="timeline position-relative mw-100 mx-auto" style="max-width: 1200px;">
+
+        <div class="timeline-item left reveal">
+            <div class="content bg-dark border border-secondary p-4 rounded-4 transition-hover">
+                <h2 class="h4 text-secondary mb-2">Upcoming Workshop</h2>
+                <span class="date d-block text-white-50 small fw-bold mb-3">Oct 15, 2024</span>
+                <p class="text-secondary mb-3">A hands-on workshop on AI and Machine Learning fundamentals for
+                    beginners.</p>
+                <a href="#" class="btn btn-sm btn-outline-primary rounded-pill px-4">Register Now</a>
             </div>
-            <div class="container" style="--dly:2s">
-                <div class="text-content">
-                    <h2>Logo Competition</h2>
-                    <p>Date: September 18, 2024<br>
-                       Participants showcased their creativity by designing unique logos. The winning designs will be displayed on our official merchandise. Thank you to everyone who participated!</p>
-                </div>
+        </div>
+
+        <div class="timeline-item right reveal">
+            <div class="content bg-dark border border-secondary p-4 rounded-4 transition-hover">
+                <h2 class="h4 text-secondary mb-2">Tech Talk Series</h2>
+                <span class="date d-block text-white-50 small fw-bold mb-3">Sep 20, 2024</span>
+                <p class="text-secondary mb-3">Industry experts sharing insights on the future of web development.</p>
+                <a href="#" class="btn btn-sm btn-outline-primary rounded-pill px-4">View Details</a>
             </div>
-            <div class="container" style="--dly:3s">
-                <div class="text-content">
-                    <h2>WebWonder</h2>
-                    <p>Date: September 18, 2024<br>
-                       This event featured workshops on the latest web development technologies. Congratulations to the winners who developed innovative web applications!</p>
-                </div>
+        </div>
+
+        <div class="timeline-item left reveal">
+            <div class="content bg-dark border border-secondary p-4 rounded-4 transition-hover">
+                <h2 class="h4 text-secondary mb-2">Hackathon 2024</h2>
+                <span class="date d-block text-white-50 small fw-bold mb-3">Aug 05, 2024</span>
+                <p class="text-secondary mb-3">Annual 24-hour hackathon fostering innovation and problem-solving skills.
+                </p>
+                <a href="#" class="btn btn-sm btn-outline-primary rounded-pill px-4">Results</a>
             </div>
-            <div class="container" style="--dly:4s">
-                <div class="text-content">
-                    <h2>The most awaited event for KEC !!!</h2>
-                    <p>Stay tuned for more surprises!</p>
-                </div>
+        </div>
+
+        <div class="timeline-item right reveal">
+            <div class="content bg-dark border border-secondary p-4 rounded-4 transition-hover">
+                <h2 class="h4 text-secondary mb-2">Inauguration</h2>
+                <span class="date d-block text-white-50 small fw-bold mb-3">Jan 01, 2024</span>
+                <p class="text-secondary mb-3">Official inauguration of the new ISTE Student Chapter board for the year.
+                </p>
             </div>
-        </section>
-    </body>
-</html>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

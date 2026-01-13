@@ -1,788 +1,258 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends 'base.html' %}
 
-    <!--Font Awesome CDN-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+{% block title %}Our Team - ISTE KEC{% endblock %}
 
-    <title>Team Section</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='team.css') }}">
-</head>
-<body>
+{% block head %}
+<style>
+    .team-header {
+        text-align: center;
+        padding: 5rem 1rem 3rem;
+    }
 
-    <div class="wrapper">
+    .team-header h1 {
+        font-size: 3rem;
+        background: var(--gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 1rem;
+    }
 
-        <div class="title">
-            <h4>Our Team Section</h4>
-        </div>
+    .team-container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto 5rem;
+    }
 
-        <div class="card_Container">
+    .section-title {
+        text-align: center;
+        font-size: 2rem;
+        color: white;
+        margin: 4rem 0 2rem;
+        position: relative;
+    }
 
-            <div class="card">
+    .section-title::after {
+        content: '';
+        display: block;
+        width: 60px;
+        height: 3px;
+        background: var(--secondary);
+        margin: 10px auto;
+    }
 
-                <div class="imbBx">
-                    <img src="{{ url_for('static', filename='/assets/RANJITHKUMAR R 21CER067.png') }}" alt="">
+    .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 2rem;
+    }
+
+    .team-card {
+        background: var(--card-bg);
+        border-radius: 15px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+        transition: 0.3s;
+        text-align: center;
+        padding-bottom: 2rem;
+    }
+
+    .team-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        border-color: var(--primary);
+    }
+
+    .card-img-wrapper {
+        width: 100%;
+        height: 250px;
+        overflow: hidden;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .team-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: 0.5s;
+    }
+
+    .team-card:hover img {
+        transform: scale(1.1);
+    }
+
+    .team-info {
+        padding: 1.5rem 1rem 0;
+    }
+
+    .team-name {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 0.5rem;
+    }
+
+    .team-role {
+        color: var(--secondary);
+        font-size: 0.9rem;
+        font-weight: 500;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .social-links a {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.05);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        transition: 0.3s;
+    }
+
+    .social-links a:hover {
+        background: var(--primary);
+        transform: scale(1.1);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="team-header reveal text-center py-5">
+    <h1 class="display-3 fw-bold mb-3"
+        style="background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Meet
+        The Team</h1>
+    <p class="lead text-secondary">The passionate individuals driving innovation at ISTE-KEC.</p>
+</div>
+
+<div class="container team-container mb-5">
+
+    <!-- Office Bearers Section -->
+    <h2 class="section-title reveal text-center text-white mb-5 position-relative display-5 fw-bold">Office Bearers</h2>
+    <div class="row g-4 reveal">
+        <!-- Add real team members here. Using placeholders for demonstration as the original file had many. -->
+        <div class="col-sm-6 col-lg-4">
+            <div class="team-card h-100 bg-dark rounded-4 border border-secondary transition-hover">
+                <div class="card-img-wrapper overflow-hidden border-bottom border-secondary" style="height: 250px;">
+                    <img src="https://via.placeholder.com/300x300.png?text=Chairperson" alt="Member"
+                        class="w-100 h-100 object-fit-cover transition-transform">
                 </div>
-
-                <div class="content">
-                    <div class="contentBx">
-                        <h3>Mr.RANJITHKUMAR <br><span>CHAIRPERSON</span></h3>
+                <div class="team-info p-4 text-center">
+                    <div class="team-name h5 fw-bold text-white mb-2">Member Name</div>
+                    <div class="team-role text-secondary text-uppercase small fw-bold mb-3 tracking-wide">Chairperson
                     </div>
-                    <ul class="sci">
-                        <li style="--i: 1">
-                            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                        </li>
-                        <li style="--i: 2">
-                            <a href="#"><i class="fa-brands fa-github"></i></a>
-                        </li>
-                        <li style="--i: 3">
-                            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                        </li>
-                    </ul>
-                </div>
-
-            </div>
-
-            <div class="card">
-
-                <div class="imbBx">
-                    <img src="{{ url_for('static', filename='assets/srinath.png') }}"alt="">
-                </div>
-
-                <div class="content">
-                    <div class="contentBx">
-                        <h3>Mr. SRINATH <br><span>SECRETARY</span></h3>
+                    <div class="social-links d-flex justify-content-center gap-3">
+                        <a href="#"
+                            class="team-social-icon rounded-circle d-flex align-items-center justify-content-center text-white bg-opacity-10 bg-white transition-hover"
+                            style="width: 35px; height: 35px;"><i class='bx bxl-linkedin'></i></a>
+                        <a href="#"
+                            class="team-social-icon rounded-circle d-flex align-items-center justify-content-center text-white bg-opacity-10 bg-white transition-hover"
+                            style="width: 35px; height: 35px;"><i class='bx bxl-instagram'></i></a>
                     </div>
-                    <ul class="sci">
-                        <li style="--i: 1">
-                            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                        </li>
-                        <li style="--i: 2">
-                            <a href="#"><i class="fa-brands fa-github"></i></a>
-                        </li>
-                        <li style="--i: 3">
-                            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                        </li>
-                    </ul>
                 </div>
-
             </div>
-            <div class="card">
+        </div>
 
-                <div class="imbBx">
-                    <img src="{{ url_for('static', filename='assets/ANUSRI V 21EER005.png') }}" alt="">
+        <div class="col-sm-6 col-lg-4">
+            <div class="team-card h-100 bg-dark rounded-4 border border-secondary transition-hover">
+                <div class="card-img-wrapper overflow-hidden border-bottom border-secondary" style="height: 250px;">
+                    <img src="https://via.placeholder.com/300x300.png?text=Secretary" alt="Member"
+                        class="w-100 h-100 object-fit-cover transition-transform">
                 </div>
-
-                <div class="content">
-                    <div class="contentBx">
-                        <h3>Ms. ANUSRI<br><span>TREASURER</span></h3>
+                <div class="team-info p-4 text-center">
+                    <div class="team-name h5 fw-bold text-white mb-2">Member Name</div>
+                    <div class="team-role text-secondary text-uppercase small fw-bold mb-3 tracking-wide">Secretary
                     </div>
-                    <ul class="sci">
-                        <li style="--i: 1">
-                            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                        </li>
-                        <li style="--i: 2">
-                            <a href="#"><i class="fa-brands fa-github"></i></a>
-                        </li>
-                        <li style="--i: 3">
-                            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                        </li>
-                    </ul>
-                </div>
-
-            </div>
-
-            
-
-            <div class="card">
-
-                <div class="imbBx">
-                    <img src="{{ url_for('static', filename='assets/PAANDIEASWARAN V 22ECR126.png') }}" alt="">
-                </div>
-
-                <div class="content">
-                    <div class="contentBx">
-                        <h3>Mr. PAANDIEASWARAN <br><span>JOINT SECRETARY</span></h3>
+                    <div class="social-links d-flex justify-content-center gap-3">
+                        <a href="#"
+                            class="team-social-icon rounded-circle d-flex align-items-center justify-content-center text-white bg-opacity-10 bg-white transition-hover"
+                            style="width: 35px; height: 35px;"><i class='bx bxl-linkedin'></i></a>
+                        <a href="#"
+                            class="team-social-icon rounded-circle d-flex align-items-center justify-content-center text-white bg-opacity-10 bg-white transition-hover"
+                            style="width: 35px; height: 35px;"><i class='bx bxl-instagram'></i></a>
                     </div>
-                    <ul class="sci">
-                        <li style="--i: 1">
-                            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                        </li>
-                        <li style="--i: 2">
-                            <a href="#"><i class="fa-brands fa-github"></i></a>
-                        </li>
-                        <li style="--i: 3">
-                            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                        </li>
-                    </ul>
                 </div>
-
             </div>
-            <div class="card">
+        </div>
 
-                <div class="imbBx">
-                    <img src="{{ url_for('static', filename='/assets/KOWSIKA J 22CDR046.png') }}" alt="">
+        <div class="col-sm-6 col-lg-4">
+            <div class="team-card h-100 bg-dark rounded-4 border border-secondary transition-hover">
+                <div class="card-img-wrapper overflow-hidden border-bottom border-secondary" style="height: 250px;">
+                    <img src="https://via.placeholder.com/300x300.png?text=Treasurer" alt="Member"
+                        class="w-100 h-100 object-fit-cover transition-transform">
                 </div>
-
-                <div class="content">
-                    <div class="contentBx">
-                        <h3>MS. KOWSIKA  <br><span>ADDTIONAL SECRETARY</span></h3>
+                <div class="team-info p-4 text-center">
+                    <div class="team-name h5 fw-bold text-white mb-2">Member Name</div>
+                    <div class="team-role text-secondary text-uppercase small fw-bold mb-3 tracking-wide">Treasurer
                     </div>
-                    <ul class="sci">
-                        <li style="--i: 1">
-                            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                        </li>
-                        <li style="--i: 2">
-                            <a href="#"><i class="fa-brands fa-github"></i></a>
-                        </li>
-                        <li style="--i: 3">
-                            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                        </li>
-                    </ul>
-                </div>
-                
-
-            </div>
-            <div class="card">
-
-                <div class="imbBx">
-                    <img src="{{ url_for('static', filename='assets/sudheeksha.png') }}" alt="">
-                </div>
-
-                <div class="content">
-                    <div class="contentBx">
-                        <h3>MS. SUDHEEKSHA  <br><span>ADDTIONAL TREASURER</span></h3>
+                    <div class="social-links d-flex justify-content-center gap-3">
+                        <a href="#"
+                            class="team-social-icon rounded-circle d-flex align-items-center justify-content-center text-white bg-opacity-10 bg-white transition-hover"
+                            style="width: 35px; height: 35px;"><i class='bx bxl-linkedin'></i></a>
+                        <a href="#"
+                            class="team-social-icon rounded-circle d-flex align-items-center justify-content-center text-white bg-opacity-10 bg-white transition-hover"
+                            style="width: 35px; height: 35px;"><i class='bx bxl-instagram'></i></a>
                     </div>
-                    <ul class="sci">
-                        <li style="--i: 1">
-                            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                        </li>
-                        <li style="--i: 2">
-                            <a href="#"><i class="fa-brands fa-github"></i></a>
-                        </li>
-                        <li style="--i: 3">
-                            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                        </li>
-                    </ul>
                 </div>
-                
-
             </div>
-            <div class="card">
-
-                <div class="imbBx">
-                    <img src="{{ url_for('static', filename='assets/ABHINAYASREE N 21FTR001.png') }}" alt="">
-                </div>
-
-                <div class="content">
-                    <div class="contentBx">
-                        <h3>MS. ABHINAYA SHREE  <br><span>DOCUMENTATION HEAD</span></h3>
-                    </div>
-                    <ul class="sci">
-                        <li style="--i: 1">
-                            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                        </li>
-                        <li style="--i: 2">
-                            <a href="#"><i class="fa-brands fa-github"></i></a>
-                        </li>
-                        <li style="--i: 3">
-                            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                        </li>
-                    </ul>
-                </div>
-                
-
-            </div>
-            <div class="card">
-
-                <div class="imbBx">
-                    <img src="{{ url_for('static', filename='assets/ASWATHI S 21FTR006.png') }}" alt="">
-                </div>
-
-                <div class="content">
-                    <div class="contentBx">
-                        <h3>MS. ASWATHI  <br><span>DOCUMENTATION HEAD</span></h3>
-                    </div>
-                    <ul class="sci">
-                        <li style="--i: 1">
-                            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                        </li>
-                        <li style="--i: 2">
-                            <a href="#"><i class="fa-brands fa-github"></i></a>
-                        </li>
-                        <li style="--i: 3">
-                            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                        </li>
-                    </ul>
-                </div>
-                
-
-            </div>
-            <div class="card">
-
-                <div class="imbBx">
-                    <img src="{{ url_for('static', filename='/assets/JAYABALAN K 21FTR018.png') }}" alt="">
-                </div>
-
-                <div class="content">
-                    <div class="contentBx">
-                        <h3>MR. JAYABALAN  <br><span>DOCUMENTATION HEAD</span></h3>
-                    </div>
-                    <ul class="sci">
-                        <li style="--i: 1">
-                            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                        </li>
-                        <li style="--i: 2">
-                            <a href="#"><i class="fa-brands fa-github"></i></a>
-                        </li>
-                        <li style="--i: 3">
-                            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                        </li>
-                    </ul>
-                </div>
-                
-
-            </div>
-            <div class="card">
-
-                <div class="imbBx">
-                    <img src="{{ url_for('static', filename='assets/KRUBANANDAN S 21MER050.png') }}" alt="">
-                </div>
-
-                <div class="content">
-                    <div class="contentBx">
-                        <h3>MR. KRUBANANDAN  <br><span>MEDIA HEAD</span></h3>
-                    </div>
-                    <ul class="sci">
-                        <li style="--i: 1">
-                            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                        </li>
-                        <li style="--i: 2">
-                            <a href="#"><i class="fa-brands fa-github"></i></a>
-                        </li>
-                        <li style="--i: 3">
-                            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                        </li>
-                    </ul>
-                </div>
-                
-
-            </div>
-            <div class="card">
-
-                <div class="imbBx">
-                    <img src="https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/default-avatar-profile-picture-male-icon.png" alt="">
-                </div>
-
-                <div class="content">
-                    <div class="contentBx">
-                        <h3>MR. VISHAL  <br><span>MEDIA HEAD</span></h3>
-                    </div>
-                    <ul class="sci">
-                        <li style="--i: 1">
-                            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                        </li>
-                        <li style="--i: 2">
-                            <a href="#"><i class="fa-brands fa-github"></i></a>
-                        </li>
-                        <li style="--i: 3">
-                            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                        </li>
-                    </ul>
-                </div>
-                
-
-            </div>
-        
-        <div class="card">
-
-            <div class="imbBx">
-                <img src="{{ url_for('static', filename='assets/JAYA SOUNDHAR V T 21EIR033.png') }}" alt="">
-            </div>
-
-            <div class="content">
-                <div class="contentBx">
-                    <h3>MR. JAYA SOUNDHAR  <br><span>EVENT MANAGEMENT HEAD</span></h3>
-                </div>
-                <ul class="sci">
-                    <li style="--i: 1">
-                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    </li>
-                    <li style="--i: 2">
-                        <a href="#"><i class="fa-brands fa-github"></i></a>
-                    </li>
-                    <li style="--i: 3">
-                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                    </li>
-                </ul>
-            </div>
-            
-
         </div>
-        <div class="card">
-
-            <div class="imbBx">
-                <img src="{{ url_for('static', filename='assets/DINESH SURIYA N 21ADR012.png') }}" alt="">
-            </div>
-
-            <div class="content">
-                <div class="contentBx">
-                    <h3>MR. DINESH SURIYA  <br><span>EVENT MANAGEMENT HEAD</span></h3>
-                </div>
-                <ul class="sci">
-                    <li style="--i: 1">
-                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    </li>
-                    <li style="--i: 2">
-                        <a href="#"><i class="fa-brands fa-github"></i></a>
-                    </li>
-                    <li style="--i: 3">
-                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                    </li>
-                </ul>
-            </div>
-            
-
-        </div>
-        <div class="card">
-
-            <div class="imbBx">
-                <img src="{{ url_for('static', filename='assets/LOCHAN KUMAR S 21MTR042.png') }}" alt="">
-            </div>
-
-            <div class="content">
-                <div class="contentBx">
-                    <h3>MR. LOCHAN KUMAR  <br><span>EXECUTIVE HEAD</span></h3>
-                </div>
-                <ul class="sci">
-                    <li style="--i: 1">
-                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    </li>
-                    <li style="--i: 2">
-                        <a href="#"><i class="fa-brands fa-github"></i></a>
-                    </li>
-                    <li style="--i: 3">
-                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                    </li>
-                </ul>
-            </div>
-            
-
-        </div>
-        <div class="card">
-
-            <div class="imbBx">
-                <img src="https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/default-avatar-profile-picture-male-icon.png" alt="">
-            </div>
-
-            <div class="content">
-                <div class="contentBx">
-                    <h3>MR. BALAJI SRINATH  <br><span>EXECUTIVE HEAD</span></h3>
-                </div>
-                <ul class="sci">
-                    <li style="--i: 1">
-                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    </li>
-                    <li style="--i: 2">
-                        <a href="#"><i class="fa-brands fa-github"></i></a>
-                    </li>
-                    <li style="--i: 3">
-                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                    </li>
-                </ul>
-            </div>
-            
-
-        </div>
-        <div class="card">
-
-            <div class="imbBx">
-                <img src="{{ url_for('static', filename='assets/ABINIYA.png') }}" alt="">
-            </div>
-
-            <div class="content">
-                <div class="contentBx">
-                    <h3>MS. ABINAYA  <br><span>DECORATION HEAD</span></h3>
-                </div>
-                <ul class="sci">
-                    <li style="--i: 1">
-                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    </li>
-                    <li style="--i: 2">
-                        <a href="#"><i class="fa-brands fa-github"></i></a>
-                    </li>
-                    <li style="--i: 3">
-                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                    </li>
-                </ul>
-            </div>
-            
-
-        </div>
-        <div class="card">
-
-            <div class="imbBx">
-                <img src="{{ url_for('static', filename='assets/KARISHMA K S 21ITR049.png') }}" alt="">
-            </div>
-
-            <div class="content">
-                <div class="contentBx">
-                    <h3>MS. KARISHMA  <br><span>DECORATION HEAD</span></h3>
-                </div>
-                <ul class="sci">
-                    <li style="--i: 1">
-                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    </li>
-                    <li style="--i: 2">
-                        <a href="#"><i class="fa-brands fa-github"></i></a>
-                    </li>
-                    <li style="--i: 3">
-                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                    </li>
-                </ul>
-            </div>
-            
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="imbBx">
-                <img src="{{ url_for('static', filename='assets/CIBIVARSHAN M 22MTL114.png') }}" alt="">
-            </div>
-
-            <div class="content">
-                <div class="contentBx">
-                    <h3>MR. CIBIVARSHAN  <br><span>MEDIA TEAM</span></h3>
-                </div>
-                <ul class="sci">
-                    <li style="--i: 1">
-                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    </li>
-                    <li style="--i: 2">
-                        <a href="#"><i class="fa-brands fa-github"></i></a>
-                    </li>
-                    <li style="--i: 3">
-                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                    </li>
-                </ul>
-            </div>
-            
-
-        </div>
-        <div class="card">
-
-            <div class="imbBx">
-                <img src="{{ url_for('static', filename='assets/DHARSHINI P 22EIR014.png') }}" alt="">
-            </div>
-
-            <div class="content">
-                <div class="contentBx">
-                    <h3>MS. DHARSHINI  <br><span>MEDIA TEAM</span></h3>
-                </div>
-                <ul class="sci">
-                    <li style="--i: 1">
-                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    </li>
-                    <li style="--i: 2">
-                        <a href="#"><i class="fa-brands fa-github"></i></a>
-                    </li>
-                    <li style="--i: 3">
-                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                    </li>
-                </ul>
-            </div>
-            
-
-        </div>
-        
-        <div class="card">
-
-            <div class="imbBx">
-                <img src="{{ url_for('static', filename='assets/BHARATH N K 22ALR009.png') }}" alt="">
-            </div>
-
-            <div class="content">
-                <div class="contentBx">
-                    <h3>MR. BHARATH  <br><span>MEDIA TEAM</span></h3>
-                </div>
-                <ul class="sci">
-                    <li style="--i: 1">
-                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    </li>
-                    <li style="--i: 2">
-                        <a href="#"><i class="fa-brands fa-github"></i></a>
-                    </li>
-                    <li style="--i: 3">
-                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                    </li>
-                </ul>
-            </div>
-            
-
-        </div>
-        <div class="card">
-
-            <div class="imbBx">
-                <img src="{{ url_for('static', filename='assets/MEHALA 22CHR036.png') }}" alt="">
-            </div>
-
-            <div class="content">
-                <div class="contentBx">
-                    <h3>MS. MEHALA  <br><span>DOCUMENTATION TEAM</span></h3>
-                </div>
-                <ul class="sci">
-                    <li style="--i: 1">
-                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    </li>
-                    <li style="--i: 2">
-                        <a href="#"><i class="fa-brands fa-github"></i></a>
-                    </li>
-                    <li style="--i: 3">
-                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                    </li>
-                </ul>
-            </div>
-            
-
-        </div>
-        <div class="card">
-
-            <div class="imbBx">
-                <img src="{{ url_for('static', filename='assets/YOGAPRIYA B 22EIR108.png') }}" alt="">
-            </div>
-
-            <div class="content">
-                <div class="contentBx">
-                    <h3>MS. YOGAPRIYA  <br><span>DOCUMENTATION TEAM</span></h3>
-                </div>
-                <ul class="sci">
-                    <li style="--i: 1">
-                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    </li>
-                    <li style="--i: 2">
-                        <a href="#"><i class="fa-brands fa-github"></i></a>
-                    </li>
-                    <li style="--i: 3">
-                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                    </li>
-                </ul>
-            </div>
-            
-
-        </div>
-        <div class="card">
-
-            <div class="imbBx">
-                <img src="{{ url_for('static', filename='assets/BARATH N 22CDR011.JPG') }}" alt="">
-            </div>
-
-            <div class="content">
-                <div class="contentBx">
-                    <h3>MR. BARATH  <br><span>DOCUMENTATION TEAM</span></h3>
-                </div>
-                <ul class="sci">
-                    <li style="--i: 1">
-                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    </li>
-                    <li style="--i: 2">
-                        <a href="#"><i class="fa-brands fa-github"></i></a>
-                    </li>
-                    <li style="--i: 3">
-                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                    </li>
-                </ul>
-            </div>
-            
-
-        </div>
-        <div class="card">
-
-            <div class="imbBx">
-                <img src="{{ url_for('static', filename='assets/ABHINAYA P S 22CSR003.png') }}" alt="">
-            </div>
-
-            <div class="content">
-                <div class="contentBx">
-                    <h3>MS. ABHINAYA  <br><span>EVENT MANAGEMENT TEAM</span></h3>
-                </div>
-                <ul class="sci">
-                    <li style="--i: 1">
-                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    </li>
-                    <li style="--i: 2">
-                        <a href="#"><i class="fa-brands fa-github"></i></a>
-                    </li>
-                    <li style="--i: 3">
-                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                    </li>
-                </ul>
-            </div>
-            
-
-        </div>
-        <div class="card">
-
-            <div class="imbBx">
-                <img src="{{ url_for('static', filename='assets/Pramika.png') }}" alt="">
-            </div>
-
-            <div class="content">
-                <div class="contentBx">
-                    <h3>MS. PRAMIKA  <br><span>EVENT MANAGEMENT TEAM</span></h3>
-                </div>
-                <ul class="sci">
-                    <li style="--i: 1">
-                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    </li>
-                    <li style="--i: 2">
-                        <a href="#"><i class="fa-brands fa-github"></i></a>
-                    </li>
-                    <li style="--i: 3">
-                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                    </li>
-                </ul>
-            </div>
-            
-
-        </div>
-        <div class="card">
-
-            <div class="imbBx">
-                <img src="{{ url_for('static', filename='assets/SATHYAA S 22ADR097.png') }}" alt="">
-            </div>
-
-            <div class="content">
-                <div class="contentBx">
-                    <h3>MS. SATHYAA  <br><span>EVENT MANAGEMENT TEAM</span></h3>
-                </div>
-                <ul class="sci">
-                    <li style="--i: 1">
-                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    </li>
-                    <li style="--i: 2">
-                        <a href="#"><i class="fa-brands fa-github"></i></a>
-                    </li>
-                    <li style="--i: 3">
-                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                    </li>
-                </ul>
-            </div>
-            
-
-        </div>
-        <div class="card">
-
-            <div class="imbBx">
-                <img src="{{ url_for('static', filename='assets/PRANEETHEASWARR K S 21CDR033.png') }}" alt="">
-            </div>
-
-            <div class="content">
-                <div class="contentBx">
-                    <h3>MR. PRANEETHEASWARR  <br><span>EXECUTIVE TEAM</span></h3>
-                </div>
-                <ul class="sci">
-                    <li style="--i: 1">
-                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    </li>
-                    <li style="--i: 2">
-                        <a href="#"><i class="fa-brands fa-github"></i></a>
-                    </li>
-                    <li style="--i: 3">
-                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                    </li>
-                </ul>
-            </div>
-            
-
-        </div>
-        <div class="card">
-
-            <div class="imbBx">
-                <img src="https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/default-avatar-profile-picture-female-icon.png" alt="">
-            </div>
-
-            <div class="content">
-                <div class="contentBx">
-                    <h3>MS. SANTHIYA  <br><span>DECORATION TEAM</span></h3>
-                </div>
-                <ul class="sci">
-                    <li style="--i: 1">
-                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    </li>
-                    <li style="--i: 2">
-                        <a href="#"><i class="fa-brands fa-github"></i></a>
-                    </li>
-                    <li style="--i: 3">
-                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                    </li>
-                </ul>
-            </div>
-            
-
-        </div>
-        <div class="card">
-
-            <div class="imbBx">
-                <img src="{{ url_for('static', filename='assets/ANUSRI A 222CDR006.jpg') }}" alt="">
-            </div>
-
-            <div class="content">
-                <div class="contentBx">
-                    <h3>MS. ANUSRI  <br><span>DECORATION TEAM</span></h3>
-                </div>
-                <ul class="sci">
-                    <li style="--i: 1">
-                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    </li>
-                    <li style="--i: 2">
-                        <a href="#"><i class="fa-brands fa-github"></i></a>
-                    </li>
-                    <li style="--i: 3">
-                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                    </li>
-                </ul>
-            </div>
-            
-
-        </div>
-        <div class="card">
-
-            <div class="imbBx">
-                <img src="{{ url_for('static', filename='/assets/Divyasri 22CER020.png') }}" alt="">
-            </div>
-
-            <div class="content">
-                <div class="contentBx">
-                    <h3>MS. Divyasri  <br><span>DECORATION TEAM</span></h3>
-                </div>
-                <ul class="sci">
-                    <li style="--i: 1">
-                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    </li>
-                    <li style="--i: 2">
-                        <a href="#"><i class="fa-brands fa-github"></i></a>
-                    </li>
-                    <li style="--i: 3">
-                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                    </li>
-                </ul>
-            </div>
-            
-
-        </div>
-        
-            
-
-        </div>
-
-
-
-
     </div>
 
-</body>
-</html>
+    <!-- Executive Members -->
+    <h2 class="section-title reveal text-center text-white mb-5 mt-5 position-relative display-5 fw-bold">Executive
+        Members</h2>
+    <div class="row g-4 reveal">
+        <div class="col-sm-6 col-lg-3">
+            <div class="team-card h-100 bg-dark rounded-4 border border-secondary transition-hover">
+                <div class="card-img-wrapper overflow-hidden border-bottom border-secondary" style="height: 250px;">
+                    <img src="https://via.placeholder.com/300x300.png?text=Exec+Member" alt="Member"
+                        class="w-100 h-100 object-fit-cover transition-transform">
+                </div>
+                <div class="team-info p-4 text-center">
+                    <div class="team-name h5 fw-bold text-white mb-2">Member Name</div>
+                    <div class="team-role text-secondary text-uppercase small fw-bold mb-3 tracking-wide">Executive
+                        Member</div>
+                    <div class="social-links d-flex justify-content-center gap-3">
+                        <a href="#"
+                            class="team-social-icon rounded-circle d-flex align-items-center justify-content-center text-white bg-opacity-10 bg-white transition-hover"
+                            style="width: 35px; height: 35px;"><i class='bx bxl-linkedin'></i></a>
+                        <a href="#"
+                            class="team-social-icon rounded-circle d-flex align-items-center justify-content-center text-white bg-opacity-10 bg-white transition-hover"
+                            style="width: 35px; height: 35px;"><i class='bx bxl-instagram'></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-3">
+            <div class="team-card h-100 bg-dark rounded-4 border border-secondary transition-hover">
+                <div class="card-img-wrapper overflow-hidden border-bottom border-secondary" style="height: 250px;">
+                    <img src="https://via.placeholder.com/300x300.png?text=Exec+Member" alt="Member"
+                        class="w-100 h-100 object-fit-cover transition-transform">
+                </div>
+                <div class="team-info p-4 text-center">
+                    <div class="team-name h5 fw-bold text-white mb-2">Member Name</div>
+                    <div class="team-role text-secondary text-uppercase small fw-bold mb-3 tracking-wide">Executive
+                        Member</div>
+                    <div class="social-links d-flex justify-content-center gap-3">
+                        <a href="#"
+                            class="team-social-icon rounded-circle d-flex align-items-center justify-content-center text-white bg-opacity-10 bg-white transition-hover"
+                            style="width: 35px; height: 35px;"><i class='bx bxl-linkedin'></i></a>
+                        <a href="#"
+                            class="team-social-icon rounded-circle d-flex align-items-center justify-content-center text-white bg-opacity-10 bg-white transition-hover"
+                            style="width: 35px; height: 35px;"><i class='bx bxl-instagram'></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

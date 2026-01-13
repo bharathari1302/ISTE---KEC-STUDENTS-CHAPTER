@@ -1,0 +1,359 @@
+:root {
+    /* AIA-KEC Style Dark Theme with ISTE-KEC Branding */
+    --primary: #2d5aa3;
+    /* KEC Blue */
+    --secondary: #8bc53f;
+    /* KEC Green */
+    --accent: #ffffff;
+
+    --bg-body: #050505;
+    /* Deep black/gray like reference */
+    --bg-nav: rgba(10, 10, 10, 0.9);
+    --bg-card: #111111;
+
+    --text-main: #ffffff;
+    --text-muted: #a0a0a0;
+
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Inter', sans-serif;
+
+    --border: 1px solid rgba(255, 255, 255, 0.1);
+    --glow: 0 0 20px rgba(45, 90, 163, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-body);
+}
+
+body {
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    /* Reference site style */
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: 0.3s;
+}
+
+/* Navbar - Professional White Theme */
+.navbar {
+    background: #ffffff;
+    /* Solid white for perfect logo blending */
+    min-height: 80px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    /* Stronger border for separation */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    transition: 0.3s;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    max-width: 1400px;
+    margin: 0 auto;
+    height: 100%;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.nav-logo-img {
+    height: 55px;
+    /* balanced size */
+    width: auto;
+    mix-blend-mode: multiply;
+    /* Ensures white bg logos blend with white header */
+    opacity: 0.95;
+    /* Slight blend */
+}
+
+/* Specific adjustment for KEC-ISTE Logo to match visual weight */
+.iste-logo {
+    height: 75px;
+    margin-top: 5px;
+    /* Slight offset if needed */
+}
+
+
+
+.nav-link {
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    color: #333;
+    /* Dark text for white header */
+    position: relative;
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+/* Pro Hover Effect: Subtle Background Pill */
+.nav-link:hover,
+.nav-link.active {
+    color: var(--primary);
+    background: rgba(45, 90, 163, 0.08);
+    /* Very subtle tint of primary */
+}
+
+/* Animated Underline inside the pill */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 6px;
+    left: 16px;
+    /* Match padding */
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transition: 0.3s ease;
+    opacity: 0;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: calc(100% - 32px);
+    /* Match padding */
+    opacity: 1;
+}
+
+.nav-btn.nav-link {
+    background: var(--primary);
+    color: white !important;
+    padding: 10px 25px;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(45, 90, 163, 0.3);
+    border: none;
+}
+
+.nav-btn.nav-link::after {
+    display: none;
+}
+
+.nav-btn.nav-link:hover {
+    background: var(--secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(139, 197, 63, 0.4);
+}
+
+
+
+/* Page Headers */
+main {
+    padding-top: 80px;
+}
+
+/* Footer - Reference Pattern */
+footer {
+    background: #000;
+    padding: 5rem 0 2rem;
+    border-top: var(--border);
+    margin-top: 5rem;
+}
+
+.footer-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+}
+
+.footer-col h3 {
+    font-size: 1.2rem;
+    color: white;
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+}
+
+.footer-col h3::after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 2px;
+    background: var(--secondary);
+    bottom: -10px;
+    left: 0;
+}
+
+.footer-col p,
+.footer-col a {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.footer-col a:hover {
+    color: var(--primary);
+    padding-left: 5px;
+}
+
+.copyright {
+    text-align: center;
+    padding-top: 3rem;
+    margin-top: 3rem;
+    border-top: var(--border);
+    color: #555;
+    font-size: 0.85rem;
+}
+
+/* Button Global */
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    border-radius: 50px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+    border: 2px solid var(--primary);
+    box-shadow: 0 0 15px rgba(45, 90, 163, 0.4);
+}
+
+.btn-primary:hover {
+    background: transparent;
+    color: var(--primary);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+}
+
+.btn-outline:hover {
+    background: white;
+    color: black;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 900px) {
+
+
+    .nav-link {
+        font-size: 1.1rem;
+        color: #333;
+    }
+
+    /* Mobile Header Adjustments */
+    .logo-area {
+        gap: 0.8rem;
+    }
+
+    .nav-logo-img {
+        height: 45px;
+        /* Smaller logos on mobile */
+    }
+
+    .iste-logo {
+        height: 55px;
+        /* Proportional resize */
+    }
+
+    /* Mobile Typography */
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+        padding: 0 1rem;
+    }
+}
+
+@media (max-width: 600px) {
+
+    /* Mobile Team Carousel - Force Sizing */
+    .teamSwiper {
+        padding-bottom: 60px !important;
+        padding-top: 30px !important;
+    }
+
+    .team-slide {
+        width: 75vw !important;
+        /* Relative width */
+        max-width: 280px !important;
+        height: 400px !important;
+        /* Fixed height */
+        border-radius: 50px 50px 15px 15px !important;
+    }
+
+    .team-overlay {
+        width: 90% !important;
+        padding: 0.8rem !important;
+        bottom: 15px !important;
+    }
+
+    .team-overlay h3 {
+        font-size: 1.1rem !important;
+    }
+
+    /* Mobile Events - Force Sizing */
+    .swiper-slide {
+        width: 80vw !important;
+        max-width: 320px !important;
+        height: 450px !important;
+    }
+
+    /* Adjust Header for very small screens */
+    .nav-logo-img {
+        height: 40px !important;
+    }
+
+    .iste-logo {
+        height: 50px !important;
+    }
+}
+
+/* Animation Utilities */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
